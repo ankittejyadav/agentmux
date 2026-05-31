@@ -1,0 +1,4 @@
+agent: gemini
+role: foreground
+status: exited(0)
+result: .agentmux/runs/foreground-gemini-1780266693/result.md

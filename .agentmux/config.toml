@@ -1,0 +1,17 @@
+command_prefix = "//"
+
+[agents.codex]
+command = "codex"
+args = []
+
+[agents.claude]
+command = "claude"
+args = []
+
+[agents.gemini]
+command = "gemini"
+args = []
+
+[agents.agy]
+command = "agy"
+args = []

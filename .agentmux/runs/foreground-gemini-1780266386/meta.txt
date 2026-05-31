@@ -1,0 +1,3 @@
+agent: gemini
+role: foreground
+status: exited(0)
