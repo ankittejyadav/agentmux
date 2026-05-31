@@ -3,6 +3,16 @@ use std::io::{self, IsTerminal, Read, Write};
 use std::sync::{Arc, Mutex};
 use std::thread;
 
+/// Set the terminal window title using ANSI OSC escape sequence.
+fn set_terminal_title(title: &str) {
+    if io::stderr().is_terminal() {
+        let mut stderr = io::stderr();
+        // OSC 0 ; title BEL
+        let _ = write!(stderr, "\x1b]0;{}\x07", title);
+        let _ = stderr.flush();
+    }
+}
+
 pub enum SessionAction {
     Exit(i32),
     SwitchAgent { agent: String, prompt: String },
@@ -543,6 +553,9 @@ pub fn run_pty_command(
             format!("failed to spawn command `{}`: {}", launch.command, e)
         }
     })?;
+
+    // Set terminal title to show active agent
+    set_terminal_title(&format!("agentmux: {}", agent_key));
 
     // Clone killer before moving child into wait thread
     let mut child_killer = child.clone_killer();

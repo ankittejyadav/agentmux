@@ -1,0 +1,4 @@
+agent: codex
+role: foreground
+status: exited(0)
+result: .agentmux/runs/foreground-codex-1780270187/result.md

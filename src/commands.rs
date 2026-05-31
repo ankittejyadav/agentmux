@@ -26,7 +26,11 @@ pub enum WrapperCommandResult {
 }
 
 pub fn run_wrapper_command(input: &str) -> WrapperCommandResult {
-    let parts: Vec<&str> = input.split_whitespace().collect();
+    // Strip the configured command prefix if present (e.g. "//status" -> "status")
+    // so users can type //status in Ctrl-G mode and it still works.
+    let prefix = crate::config::load_command_prefix().unwrap_or_else(|_| "//".to_string());
+    let stripped = input.trim().strip_prefix(&prefix).unwrap_or(input.trim());
+    let parts: Vec<&str> = stripped.split_whitespace().collect();
     if parts.is_empty() {
         return WrapperCommandResult::Print("".to_string());
     }
@@ -140,6 +144,22 @@ mod tests {
     fn test_status_command() {
         assert!(matches!(
             run_wrapper_command("status"),
+            WrapperCommandResult::Status
+        ));
+    }
+
+    #[test]
+    fn test_prefix_stripping_command() {
+        assert!(matches!(
+            run_wrapper_command("//status"),
+            WrapperCommandResult::Status
+        ));
+        assert!(matches!(
+            run_wrapper_command(" //status"),
+            WrapperCommandResult::Status
+        ));
+        assert!(matches!(
+            run_wrapper_command("//status "),
             WrapperCommandResult::Status
         ));
     }
