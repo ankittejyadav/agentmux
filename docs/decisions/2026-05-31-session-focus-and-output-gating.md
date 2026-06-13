@@ -1,6 +1,6 @@
 # Architectural Decision Record: Session Focus, Dynamic Input Routing, and Output Gating
 
-* **Date**: 2026-06-13
+* **Date**: 2026-05-31
 
 ## 1. Context & Problem Statement
 To support interactive session switching (e.g. `focus <session-id>` and `detach`), the agentmux tool needed a way to dynamically route user keyboard input to different background process inputs, mirror process output to stdout on focus, and prevent stdout from the original foreground process from interleaving and corrupting the visual state of the focused process, all without using a full Terminal User Interface (TUI) or external alternate screen runtimes.
