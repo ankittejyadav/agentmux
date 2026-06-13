@@ -1,6 +1,6 @@
 # Architectural Decision Record: Workspace Rules and Architectural Decision Logging
 
-* **Date**: 2026-06-13
+* **Date**: 2026-05-31
 
 ## 1. Context & Problem Statement
 During development and pair-programming with agentic AI assistants, two major process friction points were identified:
