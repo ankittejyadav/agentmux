@@ -1,6 +1,6 @@
 # Architectural Decision Record: Session State Isolation
 
-* **Date**: 2026-06-13
+* **Date**: 2026-05-31
 
 ## 1. Context & Problem Statement
 In previous iterations, the command parsing module `src/commands.rs` had grown to mix command parsing, background session storage, status formatting, and process control logic. Similarly, `src/pty.rs` owned process spawning and command-mode logic, but interacted with process termination behavior directly inside command-mode handling. This lack of modularity made it difficult to introduce future interactive state transitions (like `focus` and `detach`) without risking regression, state corruption, or code duplication.

@@ -1,6 +1,6 @@
 # Architectural Decision Record: Cross-Platform Terminal Handling
 
-* **Date**: 2026-06-13
+* **Date**: 2026-05-31
 
 ## 1. Context & Problem Statement
 Early versions of `agentmux` relied on UNIX-specific `libc` calls to configure raw mode on the user's terminal. This approach broke cross-platform compatibility (e.g. compiling on Windows or platforms without a standard `libc`). Additionally, entering raw mode unconditionally caused command execution to hang or panic when run in non-interactive/piped environments (such as testing harnesses or scripts) because stdin was not a true interactive terminal.

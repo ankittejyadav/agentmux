@@ -1,6 +1,6 @@
 # Architectural Decision Record: Deadlock-Free PTY Termination
 
-* **Date**: 2026-06-13
+* **Date**: 2026-05-31
 
 ## 1. Context & Problem Statement
 When running background agent sessions, a dedicated background thread spawns the child process and blocks on `child.wait()`. If the main user control loop attempts to terminate/stop that session, it needs to access the process handle to send a kill signal. If the process handle is shared via standard shared mutability (like `Arc<Mutex<Child>>`), a deadlock can occur because the blocking wait thread holds the lock/ownership of the child process.
